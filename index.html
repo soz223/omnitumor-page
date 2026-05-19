@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OmniTumor — A Spatial Vision-Language Foundation Model for Universal Volumetric Tumor Segmentation</title>
+<meta name="description" content="OmniTumor: a vision-language foundation model for text-driven 3D tumor segmentation across CT and MRI.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+  :root { --ink:#1f2733; --muted:#6b7480; --accent:#2f6df0; --line:#e9ecf1; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; color:var(--ink); }
+  .wrap { max-width:980px; margin:0 auto; padding:0 1.5rem; }
+
+  .hero-head { padding:4.5rem 0 3rem; text-align:center;
+               background:radial-gradient(ellipse at top,#f3f7ff 0%,#ffffff 60%);
+               border-bottom:1px solid var(--line); }
+  .paper-title { font-weight:800; font-size:2.35rem; line-height:1.2; letter-spacing:-.02em; }
+  .paper-sub { color:var(--accent); font-weight:700; letter-spacing:.06em; margin-top:.4rem; }
+  .authors { margin-top:1.6rem; font-size:1.12rem; font-weight:600; }
+  .authors span { margin:0 .55rem; white-space:nowrap; }
+  .authors sup { color:var(--accent); font-weight:700; }
+  .affil { color:var(--muted); margin-top:.55rem; font-size:.95rem; }
+  .venue { color:var(--muted); margin-top:.35rem; font-size:.95rem; }
+
+  .links { margin-top:1.9rem; display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap; }
+  .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.62rem 1.25rem;
+          border-radius:999px; font-weight:600; font-size:.95rem; text-decoration:none;
+          background:var(--ink); color:#fff; transition:transform .12s ease,opacity .12s ease; }
+  .btn:hover { transform:translateY(-1px); opacity:.92; color:#fff; }
+  .btn.ghost { background:#eef1f6; color:var(--muted); cursor:default; }
+
+  section.block { padding:3.2rem 0; border-bottom:1px solid var(--line); }
+  section.block.alt { background:#fafbfc; }
+  .h { font-size:1.55rem; font-weight:800; letter-spacing:-.01em; margin-bottom:1.2rem; }
+  .lead { font-size:1.06rem; line-height:1.75; text-align:justify; color:#39414d; }
+
+  figure.fig { margin:1.6rem 0 .5rem; text-align:center; }
+  figure.fig img { max-width:100%; border:1px solid var(--line); border-radius:12px;
+                    box-shadow:0 8px 28px rgba(20,30,50,.08); background:#fff; }
+  .cap { color:var(--muted); font-size:.92rem; margin-top:.85rem; line-height:1.6; }
+
+  .feat { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin-top:1.6rem; }
+  @media (max-width:720px){ .feat{ grid-template-columns:1fr; } .paper-title{ font-size:1.8rem; } }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:1.25rem 1.35rem; }
+  .card h3 { font-weight:700; font-size:1.05rem; margin-bottom:.4rem; }
+  .card p { color:#4a525e; font-size:.97rem; line-height:1.6; }
+
+  .stats { display:flex; gap:2.4rem; flex-wrap:wrap; margin:1.4rem 0 .4rem; }
+  .stat .n { font-size:1.7rem; font-weight:800; color:var(--accent); }
+  .stat .l { color:var(--muted); font-size:.92rem; }
+
+  pre.bib { background:#0f1623; color:#e6edf7; border-radius:12px; padding:1.3rem 1.45rem;
+            overflow-x:auto; font-size:.9rem; line-height:1.55; }
+  footer { padding:2.4rem 0; text-align:center; color:var(--muted); font-size:.92rem; }
+  footer a { color:var(--accent); text-decoration:none; }
+</style>
+</head>
+<body>
+
+<header class="hero-head">
+  <div class="wrap">
+    <div class="paper-sub">OmniTumor</div>
+    <h1 class="paper-title">A Spatial Vision-Language Foundation Model<br>for Universal Volumetric Tumor Segmentation</h1>
+    <div class="authors">
+      <span>Songlin Zhao</span><span>Lichao Sun</span><span>Lifang He</span><span>Wei Liu</span>
+    </div>
+    <div class="venue">2026</div>
+    <div class="links">
+      <a class="btn" href="https://github.com/soz223/OmniTumor"><i class="fab fa-github"></i> Code</a>
+      <a class="btn" href="https://huggingface.co/datasets/fadefade/OmniTumorData"><i class="fas fa-database"></i> Dataset</a>
+      <span class="btn ghost"><i class="fas fa-file-pdf"></i> Paper (coming soon)</span>
+    </div>
+  </div>
+</header>
+
+<section class="block">
+  <div class="wrap">
+    <figure class="fig">
+      <img src="static/images/architecture.png" alt="OmniTumor framework">
+      <div class="cap">
+        <strong>The OmniTumor framework.</strong> A frozen 2D foundation model is adapted for
+        text-driven 3D segmentation: a Spatial Adapted Encoder injects volumetric context through
+        Volumetric Residual Adapters, an Orthogonal Contrastive Alignment objective calibrates
+        visual features against the text embedding, and a joint decoder fuses both modalities to
+        predict the 3D mask.
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap">
+    <div class="h">Abstract</div>
+    <p class="lead">
+      Accurate 3D tumor segmentation is fundamental for precision oncology, yet remains challenging
+      due to the heterogeneity of tumor morphology across imaging modalities. Existing foundation
+      models either lack volumetric awareness, processing 3D data as independent 2D slices, or rely
+      on labor-intensive geometric prompts such as bounding boxes. We propose <strong>OmniTumor</strong>,
+      a vision-language foundation model for text-driven 3D tumor segmentation across CT and MRI. Our
+      framework introduces two key components: a <em>Spatial Adapted Encoder</em> that injects
+      volumetric spatial context into a frozen 2D backbone via lightweight 3D adapters, and an
+      <em>Orthogonal Contrastive Alignment</em> module that calibrates visual features against text
+      embeddings by enforcing geometric orthogonality between foreground and background prototypes.
+      We curate <strong>OmniTumorData</strong>, a large-scale collection of 11,326 subjects
+      (~289K axial slices) drawn from 12 public cohorts spanning brain, abdominal, hepatic, and
+      thoracic tumors across CT and MRI.
+    </p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="h">Method</div>
+    <div class="feat">
+      <div class="card">
+        <h3>Spatial Adapted Encoder (SAE)</h3>
+        <p>A slice-to-batch reshape feeds a 3D volume through a frozen 2D Transformer; Volumetric
+        Residual Adapters with a depth-wise 3&times;1&times;1 convolution are inserted between
+        frozen blocks to re-inject inter-slice context without the quadratic cost of full 3D
+        self-attention.</p>
+      </div>
+      <div class="card">
+        <h3>Orthogonal Contrastive Alignment (OCA)</h3>
+        <p>A training-only objective that pulls foreground prototypes onto the text embedding while
+        constraining background prototypes to its null space, avoiding the spurious anti-prompt
+        signature that conventional contrastive losses encode.</p>
+      </div>
+      <div class="card">
+        <h3>Sub-region prompt ontology</h3>
+        <p>Sub-region distinctions (necrotic core / edema / enhancing tumor; abdominal vs.
+        mediastinal lymph nodes; etc.) are preserved end-to-end and augmented language-side via a
+        synonymous prompt pool.</p>
+      </div>
+      <div class="card">
+        <h3>&lambda;-scheduled mixed-cohort sampler</h3>
+        <p>A square-root &rarr; proportional &rarr; square-root schedule keeps small cohorts from
+        being drowned out by larger cohorts during training.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap">
+    <div class="h">OmniTumorData</div>
+    <div class="stats">
+      <div class="stat"><div class="n">12</div><div class="l">public cohorts</div></div>
+      <div class="stat"><div class="n">11,326</div><div class="l">subjects</div></div>
+      <div class="stat"><div class="n">~289K</div><div class="l">axial slices</div></div>
+      <div class="stat"><div class="n">CT + MRI</div><div class="l">two modalities</div></div>
+    </div>
+    <p class="lead">
+      A large-scale benchmark spanning brain MRI and abdominal, hepatic, and thoracic CT, with
+      text-promptable tumor and sub-region targets.
+    </p>
+    <figure class="fig">
+      <img src="static/images/qualitative_gt.png" alt="Representative cases with expert ground-truth annotation">
+      <div class="cap">
+        Representative cases from OmniTumorData: each pair shows the input slice and the
+        corresponding expert ground-truth annotation (red).
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="h">BibTeX</div>
+<pre class="bib">@article{omnitumor2026,
+  title   = {A Spatial Vision-Language Foundation Model for Universal Volumetric Tumor Segmentation},
+  author  = {Zhao, Songlin and Sun, Lichao and He, Lifang and Liu, Wei},
+  year    = {2026}
+}</pre>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="https://github.com/soz223/OmniTumor">Code</a> &nbsp;&middot;&nbsp;
+    <a href="https://huggingface.co/datasets/fadefade/OmniTumorData">Dataset</a>
+  </div>
+</footer>
+
+</body>
+</html>
